@@ -17,16 +17,12 @@
 </script>
 
 <form id="form-1" use:enhance method="POST">
-
   <input type="text" name="name" value="Some text"/>
-
-  <button>Submit form with use:enhance</button>
+  <button>Submit form with use:enhance</button> <!-- Nothing seems to happen -->
 </form>
 
 <form id="form-2" method="POST" style="margin-top: 20px;">
-
   <input type="text" name="name" value="Some text"/>
-
-  <button>Submit form, no enhance</button>
+  <button>Submit form, no enhance</button> <!-- can submit -->
 </form>
 
