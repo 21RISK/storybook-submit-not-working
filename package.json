@@ -52,5 +52,10 @@
 	"type": "module",
 	"dependencies": {
 		"zod": "^3.22.4"
+	},
+	"pnpm": {
+		"patchedDependencies": {
+			"@storybook/sveltekit@7.6.17": "patches/@storybook__sveltekit@7.6.17.patch"
+		}
 	}
 }

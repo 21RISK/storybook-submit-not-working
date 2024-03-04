@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   '@storybook/sveltekit@7.6.17':
-    hash: ypjvij4mfwxxsuki3ysleenelm
+    hash: 44i7pcka6pb42u5f5iv6safgga
     path: patches/@storybook__sveltekit@7.6.17.patch
 
 dependencies:
@@ -41,7 +41,7 @@ devDependencies:
     version: 7.6.17(svelte@4.2.12)
   '@storybook/sveltekit':
     specifier: ^7.6.17
-    version: 7.6.17(patch_hash=ypjvij4mfwxxsuki3ysleenelm)(@babel/core@7.24.0)(postcss@8.4.35)(svelte@4.2.12)(typescript@5.3.3)(vite@5.1.4)
+    version: 7.6.17(patch_hash=44i7pcka6pb42u5f5iv6safgga)(@babel/core@7.24.0)(postcss@8.4.35)(svelte@4.2.12)(typescript@5.3.3)(vite@5.1.4)
   '@storybook/test':
     specifier: ^7.6.17
     version: 7.6.17(vitest@1.3.1)
@@ -3416,7 +3416,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/sveltekit@7.6.17(patch_hash=ypjvij4mfwxxsuki3ysleenelm)(@babel/core@7.24.0)(postcss@8.4.35)(svelte@4.2.12)(typescript@5.3.3)(vite@5.1.4):
+  /@storybook/sveltekit@7.6.17(patch_hash=44i7pcka6pb42u5f5iv6safgga)(@babel/core@7.24.0)(postcss@8.4.35)(svelte@4.2.12)(typescript@5.3.3)(vite@5.1.4):
     resolution: {integrity: sha512-xEPlTeRU2ULwk/R/DIl7wODLbJ/Myg4YTGH89dEGsO89Q8g5aMDXmIxKBInRk97chtXFhtaHAFMzAotq8IvAeQ==}
     engines: {node: ^14.18 || >=16}
     peerDependencies:
