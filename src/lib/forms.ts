@@ -1,6 +1,6 @@
 import type { SubmitFunction } from '@sveltejs/kit';
 
-export type EnhanceDetails = {
+export type EnhanceData = {
 	formElement: HTMLFormElement;
 	submitFunction: SubmitFunction;
 	submitEvent: SubmitEvent;

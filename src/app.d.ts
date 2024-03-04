@@ -11,7 +11,7 @@ declare global {
 	}
 
 	interface WindowEventMap {
-		'storybook:enhance': CustomEvent<import('$lib/forms.js').EnhanceDetails>;
+		'storybook:enhance': CustomEvent<import('$lib/forms.js').EnhanceData>;
 	}
 }
 
