@@ -5,20 +5,24 @@
 	import { zod } from 'sveltekit-superforms/adapters';
 	import { mockEnhance } from '$lib/enhance';
 
-	const formData = defaults({ name: 'some name' }, zod(userSchema));
+	const formData = defaults(zod(userSchema));
 
 	const spForm = superForm(formData, {
-		onSubmit: (data) => {
-			console.log('🚀 ~ onSubmit:', data);
-		},
-		onUpdated(event) {
-			console.log('🚀 ~ onUpdated:', event);
-		},
-		onError(event) {
-			console.log('🚀 ~ onError:', event);
+		//validators: zod(userSchema),
+		async onResult(event) {
+			if (event.result.type == 'error') {
+				// Mocking the ActionResult (no client-side validation!)
+				const validation = await spForm.validateForm({ schema: zod(userSchema) });
+
+				event.result = {
+					type: validation.valid ? 'success' : 'failure',
+					status: validation.valid ? 200 : 400,
+					data: { validation }
+				};
+			}
 		}
 	});
-	const { enhance, errors } = spForm;
+	const { enhance, errors, form } = spForm;
 
 	let formElement: HTMLFormElement;
 
@@ -26,11 +30,14 @@
 </script>
 
 <form id="form-1" use:enhance method="POST">
-	<input type="text" name="name" />
-	<span class="invalid"
-		>{#if $errors.name}{$errors.name}{/if}</span
-	>
+	<input
+		type="text"
+		name="name"
+		bind:value={$form.name}
+		aria-invalid={$errors.name ? 'true' : undefined}
+	/>
 	<button>Submit form with use:enhance</button>
+	{#if $errors.name}<div class="invalid">{$errors.name}</div>{/if}
 </form>
 
 <form id="form-2" method="POST" style="margin-top: 20px;" bind:this={formElement}>
