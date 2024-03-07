@@ -1,0 +1,86 @@
+diff --git a/src/mocks/app/forms.ts b/src/mocks/app/forms.ts
+index d1b26867c7d6580c5978c731c9e735a58b8a8a1a..8aa823882b0c5738f4d61b3f83a0be00acfe7686 100644
+--- a/src/mocks/app/forms.ts
++++ b/src/mocks/app/forms.ts
+@@ -1,17 +1,29 @@
+-export function enhance(form: HTMLFormElement) {
+-  const listener = (e: Event) => {
+-    e.preventDefault();
+-    const event = new CustomEvent('storybook:enhance');
+-    window.dispatchEvent(event);
+-  };
+-  form.addEventListener('submit', listener);
+-  return {
+-    destroy() {
+-      form.removeEventListener('submit', listener);
+-    },
+-  };
++import type { SubmitFunction } from '@sveltejs/kit';
++
++export type EnhanceData = {
++	formElement: HTMLFormElement;
++	submitFunction: SubmitFunction;
++	submitEvent: SubmitEvent;
++};
++
++export function enhance(formElement: HTMLFormElement, submitFunction: SubmitFunction) {
++	const listener = (e: Event) => {
++		const event = new CustomEvent('storybook:enhance', {
++			detail: {
++				formElement,
++				submitFunction,
++				submitEvent: e
++			}
++		});
++		window.dispatchEvent(event);
++	};
++	formElement.addEventListener('submit', listener);
++	return {
++		destroy() {
++			formElement.removeEventListener('submit', listener);
++		}
++	};
+ }
+ 
+ export function applyAction() {}
+-
+ export function deserialize() {}
+diff --git a/template/stories_svelte-kit-skeleton-js/environment.stories.js b/template/stories_svelte-kit-skeleton-js/environment.stories.js
+deleted file mode 100644
+index a8baaabbf5be58764f8126e1f3a646eb533b9e91..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-js/forms.stories.js b/template/stories_svelte-kit-skeleton-js/forms.stories.js
+deleted file mode 100644
+index 72b584baef76e7e14578d01d877b53833a21da66..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-js/hrefs.stories.js b/template/stories_svelte-kit-skeleton-js/hrefs.stories.js
+deleted file mode 100644
+index f1cbf49735344e5c207149697cb413da63f0e3fc..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-js/navigation.stories.js b/template/stories_svelte-kit-skeleton-js/navigation.stories.js
+deleted file mode 100644
+index 8640d467c463ee803e5009fa3db492ef9e1c1728..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-js/paths.stories.js b/template/stories_svelte-kit-skeleton-js/paths.stories.js
+deleted file mode 100644
+index 5d87296483a585cc22ad925a923013db7ee752e3..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-js/stores.stories.js b/template/stories_svelte-kit-skeleton-js/stores.stories.js
+deleted file mode 100644
+index 7f7401cf8bee8dacfe18b8e6c41989f39ff6d41c..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-ts/environment.stories.js b/template/stories_svelte-kit-skeleton-ts/environment.stories.js
+deleted file mode 100644
+index a8baaabbf5be58764f8126e1f3a646eb533b9e91..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-ts/forms.stories.js b/template/stories_svelte-kit-skeleton-ts/forms.stories.js
+deleted file mode 100644
+index 72b584baef76e7e14578d01d877b53833a21da66..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-ts/hrefs.stories.js b/template/stories_svelte-kit-skeleton-ts/hrefs.stories.js
+deleted file mode 100644
+index f1cbf49735344e5c207149697cb413da63f0e3fc..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-ts/navigation.stories.js b/template/stories_svelte-kit-skeleton-ts/navigation.stories.js
+deleted file mode 100644
+index 8640d467c463ee803e5009fa3db492ef9e1c1728..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-ts/paths.stories.js b/template/stories_svelte-kit-skeleton-ts/paths.stories.js
+deleted file mode 100644
+index 5d87296483a585cc22ad925a923013db7ee752e3..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-ts/stores.stories.js b/template/stories_svelte-kit-skeleton-ts/stores.stories.js
+deleted file mode 100644
+index 7f7401cf8bee8dacfe18b8e6c41989f39ff6d41c..0000000000000000000000000000000000000000
+diff --git a/template/stories_svelte-kit-skeleton-ts/ts-docs.stories.js b/template/stories_svelte-kit-skeleton-ts/ts-docs.stories.js
+deleted file mode 100644
+index f33428810ee9f480e6accbec8bac2ef44ee78327..0000000000000000000000000000000000000000
